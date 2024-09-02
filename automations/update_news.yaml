@@ -1,0 +1,41 @@
+alias: update_news
+description: >-
+  When the feedreader gets a news, generate a summary for the new description
+  and store both the news title and the news description.
+trigger:
+  - platform: event
+    event_type: feedreader
+    event_data: {}
+condition: []
+action:
+  - action: input_text.set_value
+    metadata: {}
+    data:
+      value: "{{ trigger.event.data.title }}"
+    target:
+      entity_id: input_text.news_title
+    enabled: true
+  - action: conversation.process
+    metadata: {}
+    data:
+      text: "{{ trigger.event.data.description }}"
+      language: English
+      agent_id: 01J6R8BQ53ATYVC0F3363GC4NJ
+    response_variable: summarized_news_description
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      qos: "2"
+      retain: true
+      topic: home_assistant/news/description/raw
+      payload: "{{ trigger.event.data.description }}"
+    enabled: true
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      qos: "2"
+      retain: true
+      topic: home_assistant/news/description/summarized
+      payload: "{{ summarized_news_description.response.speech.plain.speech }}"
+mode: queued
+max: 20
