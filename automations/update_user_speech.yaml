@@ -1,0 +1,16 @@
+alias: update_user_speech
+description: >-
+  When the text recognized from user's speech is published to the corresponding
+  MQTT topic, update the AlphaMini User Speech helper.
+trigger:
+  - platform: mqtt
+    topic: /alphamini/sendtoha
+condition: []
+action:
+  - metadata: {}
+    data:
+      value: "{{trigger.payload}}"
+    target:
+      entity_id: input_text.alphamini_user_speech
+    action: input_text.set_value
+mode: single
