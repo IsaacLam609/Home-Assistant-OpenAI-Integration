@@ -13,6 +13,7 @@ This project focuses on developing a smart home platform (Home Assistant) for a 
 
 ## Usage
 **Automations**
+- Create input text helpers for conversation ID, user's speech, response message and news title.
 - Choose the 'edit in YAML' option after creating an automation.
 - Paste the yaml code.
 - Include the agent IDs of the ones you have created.
