@@ -1,0 +1,30 @@
+alias: get_conversation_id_on_start
+description: >-
+  The conversation id being used will be invalid after reboot.
+
+  This automation gets a new conversation id after reboot and update the
+  alphamini conversation id helper state.
+trigger:
+  - platform: homeassistant
+    event: start
+condition: []
+action:
+  - data:
+      text: "system message: home assistant started"
+      agent_id: <your-id>
+    response_variable: assistant_response
+    action: conversation.process
+  - metadata: {}
+    data:
+      value: "{{ assistant_response.conversation_id }}"
+    target:
+      entity_id: input_text.alphamini_conversation_id
+    action: input_text.set_value
+  - action: input_text.set_value
+    target:
+      entity_id:
+        - input_text.alphamini_response
+        - input_text.alphamini_user_speech
+    data:
+      value: waiting for input
+mode: single
