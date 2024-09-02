@@ -1,0 +1,8 @@
+sensor:
+  - name: "Raw News Description"
+    state_topic: "home_assistant/news/description/raw"
+    unique_id: "raw_news_description"
+
+  - name: "Summarized News Description"
+    state_topic: "home_assistant/news/description/summarized"
+    unique_id: "summarized_news_description"
