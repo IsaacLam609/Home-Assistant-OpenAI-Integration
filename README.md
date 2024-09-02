@@ -1,5 +1,5 @@
 # Home Assistant Integration with OpenAI
-
+This project is developed together with the [AlphaMini humanoid robot](https://github.com/IsaacLam609/GenAI-Humanoid-With-Smart-Home).
 ## Introduction
 This project focuses on developing a smart home platform (Home Assistant) for a smart elderly home. The goal is to help users manage their smart home devices through the UI and voice commands while maintaining a natural conversation flow. The project uses OpenAI services for natural language processing.
 
