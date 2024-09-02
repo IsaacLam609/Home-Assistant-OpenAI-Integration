@@ -1,0 +1,49 @@
+alias: text_generation
+description: >-
+  When the text recognized from user's speech is published to the corresponding
+  MQTT topic, generate and publish the response text message to the
+  corresponding MQTT topic.
+trigger:
+  - platform: mqtt
+    topic: /alphamini/sendtoha
+condition:
+  - not:
+      - condition: state
+        entity_id: input_text.alphamini_conversation_id
+        state: unknown
+action:
+  - metadata: {}
+    data:
+      agent_id: <your-id>
+      language: Chinese
+      text: "{{trigger.payload}}"
+      conversation_id: "{{ states('input_text.alphamini_conversation_id') }}"
+    response_variable: assistant_response
+    enabled: true
+    action: conversation.process
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ (assistant_response.response.response_type == \"error\") }}"
+        sequence:
+          - action: mqtt.publish
+            metadata: {}
+            data:
+              qos: 0
+              retain: false
+              topic: /alphamini/getfromha
+              payload: Sorry, there is an error. Please speak again.
+    enabled: true
+    default:
+      - action: mqtt.publish
+        metadata: {}
+        data:
+          qos: 0
+          retain: false
+          topic: /alphamini/getfromha
+          payload: |-
+            {{ assistant_response.response.speech.plain.speech }}
+            {# {{ assistant_response.response.response_type }} #}
+            {# {{ assistant_response.conversation_id }} #}
+            {# {{ states('input_text.alphamini_conversation_id') }} #}
+mode: single
