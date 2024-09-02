@@ -1,0 +1,16 @@
+alias: update_response
+description: >-
+  When the response text is published to the corresponding MQTT topic, update
+  the AlphaMini Response helper.
+trigger:
+  - platform: mqtt
+    topic: /alphamini/getfromha
+condition: []
+action:
+  - metadata: {}
+    data:
+      value: "{{trigger.payload}}"
+    target:
+      entity_id: input_text.alphamini_response
+    action: input_text.set_value
+mode: single
