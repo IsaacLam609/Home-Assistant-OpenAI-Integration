@@ -11,6 +11,12 @@ This project focuses on developing a smart home platform (Home Assistant) for a 
 - Communicating with other devices using protocols like MQTT
 - Developers' dashboard for future development
 
+User Dashboard
+![user dashboard](/dashboard/home_assistant_user_dashboard_eng.png)
+
+Developer Dashboard
+![developer dashboard](/dashboard/home_assistant_dev_dashboard_eng.png)
+
 ## Usage
 **Automations**
 - Create input text helpers for conversation ID, user's speech, response message and news title.
