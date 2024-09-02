@@ -15,6 +15,7 @@ This project focuses on developing a smart home platform (Home Assistant) for a 
 **Automations**
 - Choose the 'edit in YAML' option after creating an automation.
 - Paste the yaml code.
+- Include the agent IDs of the ones you have created.
 
 **Configurations**
 - Install Studio Code Server add-on.
