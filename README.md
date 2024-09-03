@@ -36,7 +36,7 @@ Developer Dashboard
 ## Architecture
 - **Components:**
   - **Humanoid Robot** (or other devices): The humanoid robot which recognizes and sends users' speech.
-  - **Home Assistant**: The platform for managing smart home devices.
+  - **Home Assistant**: The platform for managing smart home devices. Home Assistant Operating System is installed on a virtual machine running on a Linux host.
  
 - **Flow:** *text_generation* automation
   1. The humanoid publishes the recognized user message to an MQTT topic.
